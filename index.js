@@ -29,6 +29,10 @@ app.use(express.json());
 // Serve the static React WebApp build
 app.use(express.static(path.join(__dirname, 'webapp/dist')));
 
+app.get('/', (req, res) => {
+    res.send('<h2>Bot Backend Server 🟢 Onlayn</h2><p>Maxsus API yo\'llar orqali kiring.</p>');
+});
+
 app.get('/api/stats', async (req, res) => {
     const { chatId } = req.query;
     if (!chatId) return res.status(400).json({ error: 'chatId is required' });
