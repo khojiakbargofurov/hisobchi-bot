@@ -1,0 +1,291 @@
+:root {
+  --bg-main: #0B1120;
+  --bg-card: #151F32;
+  --text-main: #FFFFFF;
+  --text-muted: #8B9BB4;
+
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --accent-blue: #3b82f6;
+  --accent-green: #10B981;
+  --accent-red: #EF4444;
+
+  --app-radius-xl: 32px;
+  --app-radius-lg: 24px;
+  --app-radius-md: 16px;
+  --app-radius-sm: 12px;
+
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 90px;
+}
+
+.container {
+  padding: 20px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Glassmorphism Card System */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--app-radius-lg);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Balance Hero Display */
+.hero-card {
+  text-align: center;
+  padding: 35px 20px;
+  background: var(--accent-gradient) !important;
+  color: #ffffff !important;
+  border-radius: var(--app-radius-xl);
+  box-shadow: 0 16px 32px -8px rgba(59, 130, 246, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+}
+
+.hero-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.hero-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.hero-currency {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-left: 6px;
+}
+
+/* Dashboard Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.quick-stat {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--app-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.stat-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.text-income {
+  color: var(--accent-green);
+}
+
+.text-expense {
+  color: var(--accent-red);
+}
+
+/* Chart Section */
+.chart-container {
+  height: 240px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 10px 0 16px 4px;
+  color: var(--text-main);
+}
+
+/* Transactions History List */
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tx-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px;
+  background: var(--bg-card);
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.tx-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tx-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-income {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+}
+
+.bg-expense {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
+}
+
+.tx-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tx-desc {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.tx-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.tx-amount {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: rgba(21, 31, 50, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 50;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 50%;
+  height: 100%;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.nav-item.active {
+  color: var(--accent-blue);
+}
+
+/* Loaders and Anim */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--bg-main);
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
