@@ -594,7 +594,7 @@ bot.on('callback_query', async (query) => {
     }
 });
 
-// Setup Daily Notification Cron Job (Runs at 08:00 AM every day)
+// Setup Daily Notification Cron Job (Runs at 08:00 AM every day in UZT)
 cron.schedule('0 8 * * *', async () => {
     console.log("Running daily 8 AM notification job...");
     try {
@@ -613,6 +613,9 @@ cron.schedule('0 8 * * *', async () => {
     } catch (err) {
         console.error("Error in daily cron job:", err);
     }
+}, {
+    scheduled: true,
+    timezone: "Asia/Tashkent"
 });
 
 console.log("Bot server is running...");
