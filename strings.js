@@ -37,7 +37,8 @@ const strings = {
         voiceTranslated: "Sizning ovozingiz:",
         limitsPrompt: "joriy oylik xarajat limingizni kiritish uchun shunchaki raqam yozib yuboring (Masalan: 5000000).\n\nO'chirish uchun 0 ni yuboring.",
         limitSaved: (limit) => limit === 0 ? "❗️ Oylik limit bekor qilindi." : `✅ Oylik limit o'rnatildi: ${limit.toLocaleString()} so'm`,
-        limitExceededAlert: (expense, limit) => `⚠️ **DIQQAT! Limitdan oshib ketdingiz!**\n\nJoriy oydagi jami xarajatlaringiz: ${expense.toLocaleString()} so'm.\nBelgilangan limit: ${limit.toLocaleString()} so'm!`
+        limitExceededAlert: (expense, limit) => `⚠️ **DIQQAT! Limitdan oshib ketdingiz!**\n\nJoriy oydagi jami xarajatlaringiz: ${expense.toLocaleString()} so'm.\nBelgilangan limit: ${limit.toLocaleString()} so'm!`,
+        dailyReminder: "Xayrli tong! ☀️\nBugun ham xarajat va daromadlaringizni hisobga olishni unutmang. Bot sizga qulaylik yaratishga doim tayyor."
     },
     ru: {
         welcomeText: (name) => `Добро пожаловать! 👋\n\n📊 Hisobchi AI — это искусственный интеллект, автоматически управляющий вашими личными финансами.\n\n💡 Что он умеет?:\n💬 Понимает вас по голосу\n📊 Анализирует ваши доходы и расходы\n🏷 Распределяет расходы по категориям\n✅ Помогает формировать финансовую дисциплину\n\n⏩ Для продолжения отправьте свой номер телефона с помощью кнопки ниже:`,
@@ -77,7 +78,8 @@ const strings = {
         voiceTranslated: "Ваш голос:",
         limitsPrompt: "чтобы ввести текущий ежемесячный лимит расходов, просто отправьте сумму (Пример: 5000000).\n\nЧтобы удалить лимит, отправьте 0.",
         limitSaved: (limit) => limit === 0 ? "❗️ Месячный лимит отменен." : `✅ Месячный лимит установлен: ${limit.toLocaleString()} сум`,
-        limitExceededAlert: (expense, limit) => `⚠️ **ВНИМАНИЕ! Вы превысили лимит!**\n\nОбщие расходы за текущий месяц: ${expense.toLocaleString()} сум.\nУстановленный лимит: ${limit.toLocaleString()} сум!`
+        limitExceededAlert: (expense, limit) => `⚠️ **ВНИМАНИЕ! Вы превысили лимит!**\n\nОбщие расходы за текущий месяц: ${expense.toLocaleString()} сум.\nУстановленный лимит: ${limit.toLocaleString()} сум!`,
+        dailyReminder: "Доброе утро! ☀️\nНе забудьте сегодня учесть свои расходы и доходы. Бот всегда готов помочь вам с этим."
     }
 };
 

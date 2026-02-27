@@ -1,5 +1,6 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
+const cron = require('node-cron');
 const db = require('./db');
 const strings = require('./strings');
 
@@ -590,6 +591,27 @@ bot.on('callback_query', async (query) => {
     } catch (error) {
         console.error(error);
         bot.answerCallbackQuery(query.id);
+    }
+});
+
+// Setup Daily Notification Cron Job (Runs at 08:00 AM every day)
+cron.schedule('0 8 * * *', async () => {
+    console.log("Running daily 8 AM notification job...");
+    try {
+        const users = await db.getAllUsers();
+        for (const user of users) {
+            if (user && user.telegram_id) {
+                const lang = user.lang || 'uz';
+                const s = strings[lang];
+                if (s.dailyReminder) {
+                    bot.sendMessage(user.telegram_id, s.dailyReminder).catch(err => {
+                        console.error(`Failed to send daily reminder to ${user.telegram_id}:`, err.message);
+                    });
+                }
+            }
+        }
+    } catch (err) {
+        console.error("Error in daily cron job:", err);
     }
 });
 
