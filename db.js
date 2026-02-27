@@ -15,8 +15,12 @@ const initDb = () => {
         lang TEXT DEFAULT NULL,
         phone TEXT DEFAULT NULL,
         name TEXT DEFAULT NULL,
+        monthly_limit INTEGER DEFAULT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )`);
+      )`, () => {
+        // Silent migration if the user table already existed before this update
+        db.run("ALTER TABLE users ADD COLUMN monthly_limit INTEGER DEFAULT NULL", () => { });
+      });
 
       // Create Transactions table
       db.run(`CREATE TABLE IF NOT EXISTS transactions (
@@ -207,6 +211,26 @@ const deleteAllData = (telegramId) => {
   });
 };
 
+const getMonthlyLimit = async (telegramId) => {
+  await ensureUserExists(telegramId);
+  return new Promise((resolve, reject) => {
+    db.get('SELECT monthly_limit FROM users WHERE telegram_id = ?', [telegramId], (err, row) => {
+      if (err) return reject(err);
+      resolve(row ? row.monthly_limit : null);
+    });
+  });
+};
+
+const setMonthlyLimit = async (telegramId, limit) => {
+  await ensureUserExists(telegramId);
+  return new Promise((resolve, reject) => {
+    db.run('UPDATE users SET monthly_limit = ? WHERE telegram_id = ?', [limit, telegramId], (err) => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+};
+
 module.exports = {
   initDb,
   addTransaction,
@@ -220,5 +244,7 @@ module.exports = {
   getUserLang,
   setUserLang,
   setUserPhone,
-  setUserName
+  setUserName,
+  getMonthlyLimit,
+  setMonthlyLimit
 };

@@ -34,7 +34,10 @@ const strings = {
         helpBtn: "❓ Yordam",
         voiceNotConfigured: "Ovozli tizim hozircha sozlanmagan. Iltimos matn shaklida yuboring.",
         voiceListening: "⏳ Ovozli xabar tinglanmoqda...",
-        voiceTranslated: "Sizning ovozingiz:"
+        voiceTranslated: "Sizning ovozingiz:",
+        limitsPrompt: "joriy oylik xarajat limingizni kiritish uchun shunchaki raqam yozib yuboring (Masalan: 5000000).\n\nO'chirish uchun 0 ni yuboring.",
+        limitSaved: (limit) => limit === 0 ? "❗️ Oylik limit bekor qilindi." : `✅ Oylik limit o'rnatildi: ${limit.toLocaleString()} so'm`,
+        limitExceededAlert: (expense, limit) => `⚠️ **DIQQAT! Limitdan oshib ketdingiz!**\n\nJoriy oydagi jami xarajatlaringiz: ${expense.toLocaleString()} so'm.\nBelgilangan limit: ${limit.toLocaleString()} so'm!`
     },
     ru: {
         welcomeText: (name) => `Добро пожаловать! 👋\n\n📊 Hisobchi AI — это искусственный интеллект, автоматически управляющий вашими личными финансами.\n\n💡 Что он умеет?:\n💬 Понимает вас по голосу\n📊 Анализирует ваши доходы и расходы\n🏷 Распределяет расходы по категориям\n✅ Помогает формировать финансовую дисциплину\n\n⏩ Для продолжения отправьте свой номер телефона с помощью кнопки ниже:`,
@@ -71,7 +74,10 @@ const strings = {
         helpBtn: "❓ Помощь",
         voiceNotConfigured: "Голосовая система пока не настроена. Пожалуйста, отправьте текстом.",
         voiceListening: "⏳ Слушаю голосовое сообщение...",
-        voiceTranslated: "Ваш голос:"
+        voiceTranslated: "Ваш голос:",
+        limitsPrompt: "чтобы ввести текущий ежемесячный лимит расходов, просто отправьте сумму (Пример: 5000000).\n\nЧтобы удалить лимит, отправьте 0.",
+        limitSaved: (limit) => limit === 0 ? "❗️ Месячный лимит отменен." : `✅ Месячный лимит установлен: ${limit.toLocaleString()} сум`,
+        limitExceededAlert: (expense, limit) => `⚠️ **ВНИМАНИЕ! Вы превысили лимит!**\n\nОбщие расходы за текущий месяц: ${expense.toLocaleString()} сум.\nУстановленный лимит: ${limit.toLocaleString()} сум!`
     }
 };
 

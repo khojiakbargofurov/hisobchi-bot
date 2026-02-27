@@ -318,7 +318,24 @@ const processTransactionText = async (chatId, text, lang) => {
             const balance = await db.getUserBalance(chatId);
 
             const typeText = type === 'income' ? s.incomeWord : s.expenseWord;
-            bot.sendMessage(chatId, s.transactionSuccess(typeText, amount, description, balance) + `\n📌 Toifa: ${category}`);
+            let resMsg = s.transactionSuccess(typeText, amount, description, balance) + `\n📌 Toifa: ${category}`;
+
+            // Check Limits if it's an expense
+            if (type === 'expense') {
+                const limit = await db.getMonthlyLimit(chatId);
+                if (limit) {
+                    const today = new Date().toISOString().split('T')[0];
+                    const thisMonth = today.substring(0, 7);
+                    const monthlyStats = await db.getStatsByDate(chatId, thisMonth);
+                    const totalExpense = monthlyStats.expense || 0;
+
+                    if (totalExpense > limit) {
+                        resMsg += `\n\n${s.limitExceededAlert(totalExpense, limit)}`;
+                    }
+                }
+            }
+
+            bot.sendMessage(chatId, resMsg);
         } else {
             bot.sendMessage(chatId, s.invalidFormat);
         }
@@ -405,8 +422,32 @@ ${s.overallBalanceTitle} ${balance.toLocaleString()}`;
             return;
         }
 
-        if (text === s.limitsBtn || text === s.adviceBtn) {
-            bot.sendMessage(chatId, lang === 'uz' ? "Bu funksiya tez orada qo'shiladi! 🚀" : "Эта функция скоро появится! 🚀");
+        if (text === s.adviceBtn) {
+            bot.sendMessage(chatId, lang === 'uz' ? "Bu funksiya tez orada qo'shiladi! �" : "Эта функция скоро появится! �");
+            return;
+        }
+
+        if (text === s.limitsBtn) {
+            // Put the user in 'awaiting_limit' state
+            userStates[chatId] = 'awaiting_limit';
+            const limit = await db.getMonthlyLimit(chatId);
+            const currentLimitText = limit ? (lang === 'uz' ? `(Hozirgi limit: ${limit.toLocaleString()})` : `(Текущий лимит: ${limit.toLocaleString()})`) : "";
+            bot.sendMessage(chatId, `${s.limitsPrompt} ${currentLimitText}`);
+            return;
+        }
+
+        // Handle states
+        if (userStates[chatId] === 'awaiting_limit') {
+            const rawText = text.replace(/,/g, '').trim();
+            const limitAmount = parseInt(rawText);
+
+            if (!isNaN(limitAmount) && limitAmount >= 0) {
+                await db.setMonthlyLimit(chatId, limitAmount === 0 ? null : limitAmount);
+                bot.sendMessage(chatId, s.limitSaved(limitAmount));
+                delete userStates[chatId]; // remove state
+            } else {
+                bot.sendMessage(chatId, s.invalidFormat);
+            }
             return;
         }
 
