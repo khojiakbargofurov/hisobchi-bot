@@ -234,6 +234,51 @@ ${s.overallBalanceTitle} ${balance.toLocaleString()}`;
     }
 });
 
+// Command: /myid (To get admin's Telegram ID for .env setup)
+bot.onText(/\/myid/, (msg) => {
+    bot.sendMessage(msg.chat.id, `Sizning Telegram ID raqamingiz:\n\`${msg.chat.id}\``, { parse_mode: 'Markdown' });
+});
+
+// Command: /broadcast (To send beautifully formatted update notifications to all users)
+bot.onText(/\/broadcast([\s\S]*)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const adminId = process.env.ADMIN_ID;
+
+    // Check if the user is authorized
+    if (!adminId || chatId.toString() !== adminId) {
+        return bot.sendMessage(chatId, "Bunga huquqingiz yo'q! (Yoki ADMIN_ID kiritilmagan)", { parse_mode: 'Markdown' });
+    }
+
+    const broadcastMessage = match[1].trim();
+    if (!broadcastMessage) {
+        return bot.sendMessage(chatId, "Xabar matni bo'sh! Foydalanish:\n`/broadcast Sizning ajoyib yangiliklaringiz...`", { parse_mode: 'Markdown' });
+    }
+
+    try {
+        const users = await db.getAllUsers();
+        let successCount = 0;
+        let failCount = 0;
+
+        await bot.sendMessage(chatId, `⏳ Xabar yuborish boshlandi. Jami obunachilar: ${users.length}...`);
+
+        for (const user of users) {
+            if (user && user.telegram_id) {
+                try {
+                    await bot.sendMessage(user.telegram_id, broadcastMessage, { parse_mode: 'Markdown' });
+                    successCount++;
+                } catch (err) {
+                    failCount++;
+                }
+            }
+        }
+
+        bot.sendMessage(chatId, `✅ Xabar yetkazildi!\n\nYetib bordi: ${successCount} ta\nXatoliklar (Block qilganlar): ${failCount} ta`);
+    } catch (error) {
+        console.error("Broadcast xatosi:", error);
+        bot.sendMessage(chatId, "Xabar yuborishda xatolik yuz berdi.");
+    }
+});
+
 // Handle incoming contacts
 bot.on('contact', async (msg) => {
     const chatId = msg.chat.id;
