@@ -1,6 +1,6 @@
 const strings = {
     uz: {
-        welcomeText: (name) => `Xush kelibsiz! 👋\n\n📊 Hisobchi AI — bu shaxsiy moliyalaringizni avtomatik boshqaruvchi sun'iy intellekt.\n\n💡 Nimalar qila oladi?:\n💬 Sizni ovozingiz orqali tushunadi\n📊 Kirim va chiqimlaringizni tahlil qiladi\n🏷 Xarajatlaringizni toifalarga ajratadi\n✅ Moliyaviy intizomni shakllantirishga yordam beradi\n\n⏩ Davom etish uchun pastdagi tugma orqali telefon raqamingizni yuboring:`,
+        welcomeText: (name) => `Xush kelibsiz! 👋\n\n📊 Auditchi AI — bu shaxsiy moliyalaringizni avtomatik boshqaruvchi yordamchingiz.\n\n💡 Nimalar qila oladi?:\n💬 Sizni ovozingiz orqali tushunadi\n📊 Kirim va chiqimlaringizni tahlil qiladi\n🏷 Xarajatlaringizni toifalarga ajratadi\n✅ Moliyaviy intizomni shakllantirishga yordam beradi\n\n⏩ Davom etish uchun pastdagi tugma orqali telefon raqamingizni yuboring:`,
         requestPhoneBtn: "📱 Telefon raqamni yuborish",
         helpText: `Yordam:\nKirim va chiqimlarni kiritish uchun xabar matnidan foydalaning.\n\nKirim misoli:\n+150000 qarz qaytdi\n+500 mukofot\n\nChiqim misoli:\n-25000 taksi\n30000 bozorlik (faqat son yozsangiz ham chiqim hisoblanadi)\n\n/stats - Kunlik va oylik hisobotlar\n/balance - Hozirgi hisobingiz`,
         balance: (bal) => `💰 Sizning joriy balansingiz: *${bal.toLocaleString()}* so'm`,
@@ -21,7 +21,7 @@ const strings = {
         askName: "Ajoyib, tanishib olamiz, ismingiz nima?",
         registrationComplete: (name) => `Xush kelibsiz, ${name}! 🎉\n\nQuyidagi tugmalar orqali hisobotlarni olishingiz mumkin: ❤️`,
         regSuccess: (name) => `✅ Rahmat, ${name}! Ma'lumotlaringiz saqlandi.`,
-        onboardingPrompt: `✅ Ro'yxatdan o'tib oldik.\n\n- Ming marta eshitgandan bir marta ishlatib ko'rgan afzal. Hisobchi qanday ishlashini sinab ko'rishni istaysizmi?`,
+        onboardingPrompt: `✅ Ro'yxatdan o'tib oldik.\n\n- Ming marta eshitgandan bir marta ishlatib ko'rgan afzal. Auditchi qanday ishlashini sinab ko'rishni istaysizmi?`,
         btnTryOut: "Ha, sinab ko'raman 💪",
         btnAlreadyKnow: "Men bilaman ✅",
         promptTryOutTarget: `Quyidagi harajatni audio yoki matn ko'rinishida yuboring:\n\nMasalan: "Taksiga 15,000 so'm xarajat qildim"`,
@@ -41,7 +41,7 @@ const strings = {
         dailyReminder: "Xayrli tong! ☀️\nBugun ham xarajat va daromadlaringizni hisobga olishni unutmang. Bot sizga qulaylik yaratishga doim tayyor."
     },
     ru: {
-        welcomeText: (name) => `Добро пожаловать! 👋\n\n📊 Hisobchi AI — это искусственный интеллект, автоматически управляющий вашими личными финансами.\n\n💡 Что он умеет?:\n💬 Понимает вас по голосу\n📊 Анализирует ваши доходы и расходы\n🏷 Распределяет расходы по категориям\n✅ Помогает формировать финансовую дисциплину\n\n⏩ Для продолжения отправьте свой номер телефона с помощью кнопки ниже:`,
+        welcomeText: (name) => `Добро пожаловать! 👋\n\n📊 Auditchi AI — это искусственный интеллект, автоматически управляющий вашими личными финансами.\n\n💡 Что он умеет?:\n💬 Понимает вас по голосу\n📊 Анализирует ваши доходы и расходы\n🏷 Распределяет расходы по категориям\n✅ Помогает формировать финансовую дисциплину\n\n⏩ Для продолжения отправьте свой номер телефона с помощью кнопки ниже:`,
         requestPhoneBtn: "📱 Отправить номер телефона",
         helpText: `Помощь:\nИспользуйте текстовые сообщения для ввода доходов и расходов.\n\nПример дохода:\n+150000 вернули долг\n+500 премия\n\nПример расхода:\n-25000 такси\n30000 продукты (если написать только число, это тоже расход)\n\n/stats - Дневные и месячные отчеты\n/balance - Ваш текущий баланс`,
         balance: (bal) => `💰 Ваш текущий баланс: *${bal.toLocaleString()}* сум`,
@@ -62,7 +62,7 @@ const strings = {
         askName: "Супер, давайте познакомимся, как вас зовут?",
         registrationComplete: (name) => `Добро пожаловать, ${name}! 🎉\n\nС помощью кнопок ниже вы можете получить отчеты: ❤️`,
         regSuccess: (name) => `✅ Спасибо, ${name}! Ваши данные сохранены.`,
-        onboardingPrompt: `✅ Регистрация завершена.\n\n- Лучше один раз попробовать, чем тысячу раз услышать. Хотите протестировать, как работает бот-бухгалтер?`,
+        onboardingPrompt: `✅ Регистрация завершена.\n\n- Лучше один раз попробовать, чем тысячу раз услышать. Хотите протестировать, как работает Auditchi?`,
         btnTryOut: "Да, хочу попробовать 💪",
         btnAlreadyKnow: "Я уже знаю ✅",
         promptTryOutTarget: `Отправьте следующий расход в виде аудио или текста:\n\nНапример: "Потратил(а) 15,000 сум на такси"`,
